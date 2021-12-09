@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+COMMIT_URL=$(git config --local --default "" remote.origin.commitUrl)
+if [[ ! -n ${COMMIT_URL} ]]; then
+  echo "Git config remote.origin.commitUrl is required but it isn't set"
+  echo "e.g.: git config --local remote.origin.commitUrl \"https://github.com/jmera/bin/commit/\""
+  exit 1
+fi
+
+COMMIT=${2-$(git rev-parse HEAD)}
+
+open "$COMMIT_URL$COMMIT"
