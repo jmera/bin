@@ -9,6 +9,6 @@ if [[ ! -n ${COMMIT_URL} ]]; then
   exit 1
 fi
 
-COMMIT=${2-$(git rev-parse HEAD)}
+COMMIT=${1-$(git rev-parse HEAD)}
 
 open "$COMMIT_URL$COMMIT"
