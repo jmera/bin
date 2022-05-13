@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+TREE_URL=$(git config --local --default "" remote.origin.treeUrl | sed "s/\/\{0,1\}$//")
+if [[ ! -n ${TREE_URL} ]]; then
+  echo "Git config remote.origin.treeUrl is required but it isn't set"
+  echo "e.g.: git config --local remote.origin.treeUrl \"https://github.com/jmera/bin/tree/\""
+  exit 1
+fi
+
+COMMIT=${1-$(git rev-parse HEAD)}
+
+open "$TREE_URL/$COMMIT"
